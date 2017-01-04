@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Gentellela Alela! | </title>
+    <title> Sistem Informasi Capricorn Roller </title>
 
     <!-- Bootstrap -->
     <link href="<?php echo base_url().'gentelella/'?>vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -26,7 +26,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Gentellela Alela!</span></a>
+              <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Capricorn System</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -54,20 +54,20 @@
                   </li>
                   <li><a><i class="fa fa-tasks"></i> Data Master <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="form.html">Data Produk</a></li>
-                      <li><a href="form_advanced.html">Data Promosi</a></li>
-                      <li><a href="form_validation.html">Data Stok Produk</a></li>
-                      <li><a href="form_wizards.html">Data Kategori Produk</a></li>
+                      <li><a href="<?php echo site_url('produk/index')?>">Data Produk</a></li>
+                      <li><a href="<?php echo site_url('promosi/index')?>">Data Promosi</a></li>
+                      <li><a href="<?php echo site_url('stok/index')?>">Data Stok Produk</a></li>
+                      <li><a href="<?php echo site_url('kategori_produk/index')?>">Data Kategori Produk</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-book"></i> Pelaporan Data Master <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="general_elements.html">Pelaporan Data Produk</a></li>
-                      <li><a href="media_gallery.html">Pelaporan Data Promosi</a></li>
-                      <li><a href="media_gallery.html">Pelaporan Data Stok Produk</a></li>
+                      <li><a href="<?php echo site_url('laporan_data_produk/index')?>">Pelaporan Data Produk</a></li>
+                      <li><a href="<?php echo site_url('laporan_data_promosi/index')?>">Pelaporan Data Promosi</a></li>
+                      <li><a href="<?php echo site_url('laporan_data_stok/index')?>">Pelaporan Data Stok Produk</a></li>
                     </ul>
                   </li>
-                  <li><a><i class="fa fa-users"></i> Manajemen Pengguna </a>
+                  <li><a href="<?php echo site_url('pengguna/index')?>"><i class="fa fa-users"></i> Manajemen Pengguna </a>
                   </li>
                 </ul>
               </div>
@@ -182,7 +182,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Plain Page</h3>
+                <h3>Data Master</h3>
               </div>
 
               <div class="title_right">
@@ -203,7 +203,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Plain Page</h2>
+                    <h2>Data Seluruh Produk</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -222,36 +222,60 @@
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
+                    <?php echo $this->session->flashdata('error')?>
+                    <?php echo $this->session->flashdata('sukses')?>
+                      <div class="col-md-7">
+                        <a href="<?php echo site_url('produk/tambah_data_produk')?>" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-plus"></i>Tambah Data Produk</a>
+                      </div>
+                        <form action="<?php echo site_url('masuk/cariData');?>" method = "post">
+                        <div class="form-group-row">
+                          <div class="col-xs-4">
+                        <input type="text" class="form-control" placeholder="Masukkan nama produk yang dicari" name ="keyword" />
+                        </div>
+                      </div>
+                       <input type="submit" class="btn btn-info" value = "Search" />
+                      </form>
                       <table class="table table-hover">
                       <thead>
                         <tr>
                           <th>No</th>
-                          <th>First Name</th>
-                          <th>Last Name</th>
-                          <th>Username</th>
+                          <th>Kode Produk</th>
+                          <th>Nama Produk</th>
+                          <th>Harga Produk</th>
+                          <th>Deskripsi Produk</th>
+                          <th>Nama Promosi</th>
+                          <th>Nama Kategori Produk</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <th scope="row">1</th>
-                          <td>Mark</td>
-                          <td>Otto</td>
-                          <td>@mdo</td>
-                        </tr>
-                        <tr>
-                          <th scope="row">2</th>
-                          <td>Jacob</td>
-                          <td>Thornton</td>
-                          <td>@fat</td>
-                        </tr>
-                        <tr>
-                          <th scope="row">3</th>
-                          <td>Larry</td>
-                          <td>the Bird</td>
-                          <td>@twitter</td>
-                        </tr>
+                       <?php if(empty($produk)){ ?>
+                           <tr>
+                            <td colspan="6">Data tidak ditemukan</td>
+                           </tr>
+                          <?php }else{
+                            $no =  $this->uri->segment('3') + 1;
+                            foreach($produk as $data){ $no;?>
+                           <tr>
+                            <td><?php echo $no++?></td>
+                            <td><?php echo $data->id_produk?></td>
+                            <td><?php echo $data->nama_produk?></td>
+                            <td><?php echo $rp ="Rp".number_format($data->harga_produk,2,',','.')?></td>
+                            <td><?php echo $data->deskripsi_produk?></td>
+                            <td><?php echo $data->nama_promosi?></td>
+                            <td><?php echo $data->nama_kategori_produk?></td>
+                            <td>
+                                <?php echo anchor('masuk/edit/'.$data->id_produk,'<button type="button" class="btn btn-info"><i class="glyphicon glyphicon-pencil"></i>Edit Data</button>');?>
+                                <?php echo anchor('masuk/delete/'.$data->id_produk,'<button type="button" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i>Hapus Data</button>');?>
+                            </td>
+                           </tr>
+                          <?php }}?>
                       </tbody>
                     </table>
+                     <div class="row">
+                        <div class="col-md-12 text-center">
+                            <?php echo $this->pagination->create_links(); ?>
+                        </div>
+                    </div>
                   </div>
                 </div>
               </div>

@@ -54,20 +54,20 @@
                   </li>
                   <li><a><i class="fa fa-tasks"></i> Data Master <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="form.html">Data Produk</a></li>
-                      <li><a href="form_advanced.html">Data Promosi</a></li>
-                      <li><a href="form_validation.html">Data Stok Produk</a></li>
-                      <li><a href="form_wizards.html">Data Kategori Produk</a></li>
+                      <li><a href="<?php echo site_url('produk/index')?>">Data Produk</a></li>
+                      <li><a href="<?php echo site_url('promosi/index')?>">Data Promosi</a></li>
+                      <li><a href="<?php echo site_url('stok/index')?>">Data Stok Produk</a></li>
+                      <li><a href="<?php echo site_url('kategori_produk/index')?>">Data Kategori Produk</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-book"></i> Pelaporan Data Master <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="general_elements.html">Pelaporan Data Produk</a></li>
-                      <li><a href="media_gallery.html">Pelaporan Data Promosi</a></li>
-                      <li><a href="media_gallery.html">Pelaporan Data Stok Produk</a></li>
+                      <li><a href="<?php echo site_url('laporan_data_produk/index')?>">Pelaporan Data Produk</a></li>
+                      <li><a href="<?php echo site_url('laporan_data_promosi/index')?>">Pelaporan Data Promosi</a></li>
+                      <li><a href="<?php echo site_url('laporan_data_stok/index')?>">Pelaporan Data Stok Produk</a></li>
                     </ul>
                   </li>
-                  <li><a><i class="fa fa-users"></i> Manajemen Pengguna </a>
+                  <li><a href="<?php echo site_url('pengguna/index')?>"><i class="fa fa-users"></i> Manajemen Pengguna </a>
                   </li>
                 </ul>
               </div>
@@ -222,34 +222,36 @@
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
+                     <div class="col-md-7">
+                        <a href="<?php echo site_url('masuk/tambahData')?>" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-plus"></i>Tambah Data Kategori</a>
+                      </div>
                       <table class="table table-hover">
                       <thead>
                         <tr>
                           <th>No</th>
-                          <th>First Name</th>
-                          <th>Last Name</th>
-                          <th>Username</th>
+                          <th>Kode Kategori Produk</th>
+                          <th>Nama Kategori Produk</th>
+                          <th>Aksi</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <th scope="row">1</th>
-                          <td>Mark</td>
-                          <td>Otto</td>
-                          <td>@mdo</td>
-                        </tr>
-                        <tr>
-                          <th scope="row">2</th>
-                          <td>Jacob</td>
-                          <td>Thornton</td>
-                          <td>@fat</td>
-                        </tr>
-                        <tr>
-                          <th scope="row">3</th>
-                          <td>Larry</td>
-                          <td>the Bird</td>
-                          <td>@twitter</td>
-                        </tr>
+                       <?php if(empty($kategori)){ ?>
+                           <tr>
+                            <td colspan="6">Data tidak ditemukan</td>
+                           </tr>
+                          <?php }else{
+                            $no =  $this->uri->segment('3') + 1;
+                            foreach($kategori as $data){ $no;?>
+                           <tr>
+                            <td><?php echo $no++?></td>
+                            <td><?php echo $data->id_kategori_produk?></td>
+                            <td><?php echo $data->nama_kategori_produk?></td>
+                            <td>
+                                <?php echo anchor('masuk/edit/'.$data->id_kategori_produk,'<button type="button" class="btn btn-info"><i class="glyphicon glyphicon-pencil"></i>Edit Data</button>');?>
+                                <?php echo anchor('masuk/delete/'.$data->id_kategori_produk,'<button type="button" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i>Hapus Data</button>');?>
+                            </td>
+                           </tr>
+                          <?php }}?>
                       </tbody>
                     </table>
                   </div>

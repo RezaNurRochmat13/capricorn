@@ -64,10 +64,10 @@
                     <ul class="nav child_menu">
                       <li><a href="<?php echo site_url('laporan_data_produk/index')?>">Pelaporan Data Produk</a></li>
                       <li><a href="<?php echo site_url('laporan_data_promosi/index')?>">Pelaporan Data Promosi</a></li>
-                      <li><a href="media_gallery.html">Pelaporan Data Stok Produk</a></li>
+                      <li><a href="<?php echo site_url('laporan_data_stok/index')?>">Pelaporan Data Stok Produk</a></li>
                     </ul>
                   </li>
-                  <li><a><i class="fa fa-users"></i> Manajemen Pengguna </a>
+                  <li><a href="<?php echo site_url('pengguna/index')?>"><i class="fa fa-users"></i> Manajemen Pengguna </a>
                   </li>
                 </ul>
               </div>

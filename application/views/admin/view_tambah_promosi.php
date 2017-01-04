@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title> Sistem Infoormasi capricorn Roller </title>
+    <title>Gentellela Alela! | </title>
 
     <!-- Bootstrap -->
     <link href="<?php echo base_url().'gentelella/'?>vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -15,6 +15,7 @@
     <link href="<?php echo base_url().'gentelella/'?>vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- NProgress -->
     <link href="<?php echo base_url().'gentelella/'?>vendors/nprogress/nprogress.css" rel="stylesheet">
+    <link rel="stylesheet" href="<?php echo base_url().'gentelella/'?>src/css/jquery-ui.css">
 
     <!-- Custom Theme Style -->
     <link href="<?php echo base_url().'gentelella/'?>build/css/custom.min.css" rel="stylesheet">
@@ -26,7 +27,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Capricorn System</span></a>
+              <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Gentellela Alela!</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -54,7 +55,7 @@
                   </li>
                   <li><a><i class="fa fa-tasks"></i> Data Master <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="<?php echo site_url('produk/index')?>">Data Produk</a></li>
+                     <li><a href="<?php echo site_url('produk/index')?>">Data Produk</a></li>
                       <li><a href="<?php echo site_url('promosi/index')?>">Data Promosi</a></li>
                       <li><a href="<?php echo site_url('stok/index')?>">Data Stok Produk</a></li>
                       <li><a href="<?php echo site_url('kategori_produk/index')?>">Data Kategori Produk</a></li>
@@ -62,12 +63,12 @@
                   </li>
                   <li><a><i class="fa fa-book"></i> Pelaporan Data Master <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="<?php echo site_url('laporan_data_produk/index')?>">Pelaporan Data Produk</a></li>
+                       <li><a href="<?php echo site_url('laporan_data_produk/index')?>">Pelaporan Data Produk</a></li>
                       <li><a href="<?php echo site_url('laporan_data_promosi/index')?>">Pelaporan Data Promosi</a></li>
                       <li><a href="<?php echo site_url('laporan_data_stok/index')?>">Pelaporan Data Stok Produk</a></li>
                     </ul>
                   </li>
-                <li><a href="<?php echo site_url('pengguna/index')?>"><i class="fa fa-users"></i> Manajemen Pengguna </a>
+                 <li><a href="<?php echo site_url('pengguna/index')?>"><i class="fa fa-users"></i> Manajemen Pengguna </a>
                   </li>
                 </ul>
               </div>
@@ -182,7 +183,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Data Master</h3>
+                <h3>Plain Page</h3>
               </div>
 
               <div class="title_right">
@@ -203,7 +204,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Data Seluruh Promosi</h2>
+                    <h2>Plain Page</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -221,56 +222,60 @@
                     </ul>
                     <div class="clearfix"></div>
                   </div>
-                  <div class="x_content"> 
-                    <?php echo $this->session->flashdata('sukses')?>
-                      <div class="col-md-7">
-                        <a href="<?php echo site_url('promosi/tambah_data_promosi')?>" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-plus"></i>Tambah Data Promosi</a>
-                      </div>
-                        <form action="<?php echo site_url('masuk/cariData');?>" method = "post">
-                        <div class="form-group-row">
-                          <div class="col-xs-4">
-                        <input type="text" class="form-control" placeholder="Masukkan nama barang yang dicari" name ="keyword" />
-                        </div>
-                      </div>
-                       <input type="submit" class="btn btn-info" value = "Search" />
-                      </form>
-                      <table class="table table-hover">
-                      <thead>
-                        <tr>
-                          <th>No</th>
-                          <th>Kode Promosi</th>
-                          <th>Nama Promosi</th>
-                          <th>Deskripsi Promosi</th>
-                          <th>Tanggal Terakhir Promosi</th>
+                  <div class="x_content">
+                    
+                    <?php echo validation_errors(); ?>
+                      <form action="<?php echo site_url("promosi/tambah_data_promosi")?>" method="post">
+                       <table class="table table-striped" height="450px">
+                         <tr>
+                          <td>
+                            <div class=form-group-row>
+                              <label for="example-text-input" class="col-xs-2 col-form-label">Nama Promosi</label>
+                                  <div class="col-xs-10">
+                                      <div class="right-inner-addon">
+                                     <input type="text" name="nama_promosi" placeholder="Masukkan nama promosi" class="form-control" value="<?php echo set_value('nama_promosi')?>" required>
+                                  </div>
+                                </div>
+                            </div>
+                          </td>
                         </tr>
-                      </thead>
-                      <tbody>
-                        <?php if(empty($promosi)){ ?>
-                           <tr>
-                            <td colspan="6">Data tidak ditemukan</td>
-                           </tr>
-                          <?php }else{
-                            $no =  $this->uri->segment('3') + 1;
-                            foreach($promosi as $data){ $no;?>
-                           <tr>
-                            <td><?php echo $no++?></td>
-                            <td><?php echo $data->id_promosi?></td>
-                            <td><?php echo $data->nama_promosi?></td>
-                            <td><?php echo $data->deskripsi_promosi?></td>
-                            <td><?php echo date("d F Y",strtotime($data->tanggal_berakhir_promosi)); ?></td>
-                            <td>
-                                <?php echo anchor('masuk/edit/'.$data->id_promosi,'<button type="button" class="btn btn-info"><i class="glyphicon glyphicon-pencil"></i>Edit Data</button>');?>
-                                <?php echo anchor('masuk/delete/'.$data->id_promosi,'<button type="button" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i>Hapus Data</button>');?>
+                         <tr>
+                          <td>
+                            <div class="form-group-row">
+                               <label for="example-text-input" class="col-xs-2 col-form-label">Deskripsi Promosi</label>
+                                <div class="col-xs-10">
+                                  <div class="right-inner-addon">
+                                   <input type="text" name="deskripsi_promosi" class="form-control" placeholder="Masukkan deskripsi promosi" value="<?php echo set_value('deskripsi_promosi')?>" required>
+                               </div> 
+                              </div>
+                            </div>
                             </td>
-                           </tr>
-                          <?php }}?>
-                      </tbody>
-                    </table>
-                    <div class="row">
-                        <div class="col-md-12 text-center">
-                            <?php echo $this->pagination->create_links(); ?>
-                        </div>
-                    </div>
+                         </tr>
+                         <tr>
+                          <td>
+                            <div class="form-group=row">
+                              <label for="example-text-input" class="col-xs-2 col-form-label">Tanggal Berakhir Promosi</label>
+                              <div class="col-xs-10">
+                                <div class="right-inner-addon">
+                                 <input type="date" name="tanggal_berakhir_promosi" id="datepicker" class="form-control" placeholder="Masukkan tanggal promosi berakhir" value="<?php echo set_value('tanggal_berakhir_promosi')?>" required>
+                              </div>
+                            </div>
+                          </div>
+                          </td>
+                         </tr>
+                       </div>
+                     </div>
+                   </div>
+                         <tr>
+                          <td>
+                            <input type="submit" name="submit" class="btn btn-success" value="Simpan">
+                            <button type="reset" class="btn btn-default">Batal</button>
+                          </div>
+                          </td>
+                         </tr>
+                       </div>
+                       </table>
+                     </form>
                   </div>
                 </div>
               </div>
@@ -279,8 +284,8 @@
         </div>
 
         <!-- /page content -->
-		
-		
+    
+    
 
         <!-- footer content -->
         <footer>
@@ -304,5 +309,17 @@
     
     <!-- Custom Theme Scripts -->
     <script src="<?php echo base_url().'gentelella/'?>build/js/custom.min.js"></script>
+    <script src="<?php echo base_url().'gentelella/'?>src/js/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "#datepicker" ).datepicker({
+      dateFormat:'yy-mm-dd',
+      changeMonth: true,
+      changeYear: true,
+      showDropdowns: true,
+      yearRange:"-100:+0"
+    });
+  });
+  </script>
   </body>
 </html>

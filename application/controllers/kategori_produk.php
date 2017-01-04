@@ -17,11 +17,12 @@ class kategori_produk extends CI_Controller{
 								// maka tidak perlu mendeklarasikan lagi di masing-masing function.
 		parent::__construct();
 		$this->load->helper('url'); //Sebuah helper dari CodeIgniter untuk membantu ketika ada perpindahan layout.
+		$this->load->model('model_kategori_produk'); //Script untuk memanggil model kategori produk.
 	}
 
 	public function index(){ //Function untuk menampilkan halaman data kategori produk.
-
-		$this->load->view('admin/view_kategori_produk'); //Script untuk menampilkan halaman data kategori produk.
+		$data['kategori']=$this->model_kategori_produk->tampil_kategori();
+		$this->load->view('admin/view_kategori_produk',$data); //Script untuk menampilkan halaman data kategori produk.
 	}
 
 }
