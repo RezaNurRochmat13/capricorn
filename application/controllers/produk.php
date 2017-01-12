@@ -12,21 +12,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class produk extends CI_Controller{
 
 	
-	public function __construct(){ //Function untuk mendeklarasikan konstruktor seperti yang ada di Java. 
-								  //Tetapi function ini mendeklarasikan class-class yang ada di CodeIgniter seperti helper, library dll.
-								//Dengan mendeklarasikan semua library atau helper yg dibutuhkan,
-								// maka tidak perlu mendeklarasikan lagi di masing-masing function.
+	public function __construct(){ 
+
 		parent::__construct();
-		$this->load->library('pagination'); //Script untuk meload library CodeIgniter Pagination Class.
-		$this->load->library('form_validation'); //Script untuk meload library CodeIgniter khusus untuk validasi form.
-		$this->load->library('session'); //Script untuk membantu mengurusi session di CodeIgniter. 
-		$this->load->helper('url'); //Sebuah helper dari CodeIgniter untuk membantu ketika ada perpindahan layout.
-		$this->load->helper('form'); //Script helper dari CideIgniter untuk membantu ketiak kita menggunakan form.
-		$this->load->model('model_produk'); //Script untuk meload model.
+		$this->load->library('pagination');
+		$this->load->library('form_validation'); 
+		$this->load->library('session'); 
+		$this->load->helper('url'); 
+		$this->load->helper('form');
+		$this->load->model('model_produk'); 
 	}
 
 
-	public function index(){ //Sebuah function untuk menampilkan halaman produk.
+	public function index(){
 		$jumlah_data = $this->model_produk->jumlah_data();
 	    $config['base_url'] = base_url().'index.php/produk/index/';
 	    $config['total_rows'] = $jumlah_data;
@@ -55,10 +53,10 @@ class produk extends CI_Controller{
 
 	    $this->pagination->initialize($config);   
 	    $data['produk'] = $this->model_produk->data($config['per_page'],$from);
-		$this->load->view('admin/view_produk',$data); //Script untuk menampilkan halaman data produk.
+		$this->load->view('admin/view_produk',$data); 
 	}
 
-	public function tambah_data_produk(){ //Function untuk menambah data produk.
+	public function tambah_data_produk(){ 
 
 		$this->form_validation->set_rules('nama_produk','Nama Produk','required');
 		$this->form_validation->set_rules('harga_produk','Harga Produk','required');

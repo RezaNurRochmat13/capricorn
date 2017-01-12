@@ -226,30 +226,31 @@
                       <thead>
                         <tr>
                           <th>No</th>
-                          <th>First Name</th>
-                          <th>Last Name</th>
-                          <th>Username</th>
+                          <th>Nama Produk</th>
+                          <th>Jumlah Stok</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <th scope="row">1</th>
-                          <td>Mark</td>
-                          <td>Otto</td>
-                          <td>@mdo</td>
-                        </tr>
-                        <tr>
-                          <th scope="row">2</th>
-                          <td>Jacob</td>
-                          <td>Thornton</td>
-                          <td>@fat</td>
-                        </tr>
-                        <tr>
-                          <th scope="row">3</th>
-                          <td>Larry</td>
-                          <td>the Bird</td>
-                          <td>@twitter</td>
-                        </tr>
+                       <?php if(empty($laporan_stok)){ ?>
+                           <tr>
+                            <td colspan="6">Data tidak ditemukan</td>
+                           </tr>
+                          <?php }else{
+                            $no =  $this->uri->segment('3') + 1;
+                            foreach($laporan_stok as $data){ $no;?>
+                           <tr>
+                            <td><?php echo $no++?></td>
+                            <td><?php echo $data->nama_produk?></td>
+                            <td><?php echo $data->Jumlah?></td>
+                           </tr>
+                          <?php }}?>
+                      </tbody>
+                    </table>
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <?php echo $this->pagination->create_links(); ?>
+                        </div>
+                    </div>
                       </tbody>
                     </table>
                   </div>

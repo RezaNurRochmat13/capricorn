@@ -26,6 +26,18 @@ class model_stok extends CI_Model{
 		$query=$this->db->get('produk');
 		return $query->result();
 	}
+
+	public function data($number,$offset){ //Function untuk melimit hasil dari data yang diambil.
+		$this->db->select('COUNT(id_produk) AS Jumlah,nama_produk');
+		$this->db->group_by('nama_produk');
+		return $query= $this->db->get('produk',$number,$offset)->result();		
+	}
+ 
+	public function jumlah_data(){ //Function untuk menampilkan jumlah data yang ada.
+		$this->db->select('COUNT(id_produk) AS Jumlah,nama_produk');
+		$this->db->group_by('nama_produk');
+		return $query= $this->db->get('produk')->num_rows();
+	}
 }
 
 ?>

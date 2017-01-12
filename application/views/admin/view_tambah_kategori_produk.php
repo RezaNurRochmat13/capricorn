@@ -54,7 +54,7 @@
                   </li>
                   <li><a><i class="fa fa-tasks"></i> Data Master <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="<?php echo site_url('produk/index')?>">Data Produk</a></li>
+                     <li><a href="<?php echo site_url('produk/index')?>">Data Produk</a></li>
                       <li><a href="<?php echo site_url('promosi/index')?>">Data Promosi</a></li>
                       <li><a href="<?php echo site_url('stok/index')?>">Data Stok Produk</a></li>
                       <li><a href="<?php echo site_url('kategori_produk/index')?>">Data Kategori Produk</a></li>
@@ -62,12 +62,12 @@
                   </li>
                   <li><a><i class="fa fa-book"></i> Pelaporan Data Master <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="<?php echo site_url('laporan_data_produk/index')?>">Pelaporan Data Produk</a></li>
+                       <li><a href="<?php echo site_url('laporan_data_produk/index')?>">Pelaporan Data Produk</a></li>
                       <li><a href="<?php echo site_url('laporan_data_promosi/index')?>">Pelaporan Data Promosi</a></li>
                       <li><a href="<?php echo site_url('laporan_data_stok/index')?>">Pelaporan Data Stok Produk</a></li>
                     </ul>
                   </li>
-                  <li><a href="<?php echo site_url('pengguna/index')?>"><i class="fa fa-users"></i> Manajemen Pengguna </a>
+                 <li><a href="<?php echo site_url('pengguna/index')?>"><i class="fa fa-users"></i> Manajemen Pengguna </a>
                   </li>
                 </ul>
               </div>
@@ -222,44 +222,35 @@
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
-                      <?php echo $this->session->flashdata('sukses')?>
-                     <div class="col-md-7">
-                        <a href="<?php echo site_url('kategori_produk/tambah_kategori')?>" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-plus"></i>Tambah Data Kategori</a>
-                      </div>
-                      <table class="table table-hover">
-                      <thead>
-                        <tr>
-                          <th>No</th>
-                          <th>Kode Kategori Produk</th>
-                          <th>Nama Kategori Produk</th>
-                          <th>Aksi</th>
+                    
+                    <?php echo validation_errors(); ?>
+                      <form action="<?php echo site_url("kategori_produk/tambah_kategori")?>" method="post">
+                       <table class="table table-striped" height="450px">
+                         <tr>
+                          <td>
+                            <div class=form-group-row>
+                              <label for="example-text-input" class="col-xs-2 col-form-label">Nama Produk</label>
+                                  <div class="col-xs-10">
+                                      <div class="right-inner-addon">
+                                     <input type="text" name="nama_kategori_produk" placeholder="Masukkan nama kategori produk" class="form-control" value="<?php echo set_value('nama_kategori_produk')?>" required>
+                                  </div>
+                                </div>
+                            </div>
+                          </td>
                         </tr>
-                      </thead>
-                      <tbody>
-                       <?php if(empty($kategori)){ ?>
-                           <tr>
-                            <td colspan="6">Data tidak ditemukan</td>
-                           </tr>
-                          <?php }else{
-                            $no =  $this->uri->segment('3') + 1;
-                            foreach($kategori as $data){ $no;?>
-                           <tr>
-                            <td><?php echo $no++?></td>
-                            <td><?php echo $data->id_kategori_produk?></td>
-                            <td><?php echo $data->nama_kategori_produk?></td>
-                            <td>
-                                <?php echo anchor('masuk/edit/'.$data->id_kategori_produk,'<button type="button" class="btn btn-info"><i class="glyphicon glyphicon-pencil"></i>Edit Data</button>');?>
-                                <?php echo anchor('masuk/delete/'.$data->id_kategori_produk,'<button type="button" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i>Hapus Data</button>');?>
-                            </td>
-                           </tr>
-                          <?php }}?>
-                      </tbody>
-                    </table>
-                    <div class="row">
-                        <div class="col-md-12 text-center">
-                            <?php echo $this->pagination->create_links(); ?>
-                        </div>
-                    </div>
+                       </div>
+                     </div>
+                   </div>
+                         <tr>
+                          <td>
+                            <input type="submit" name="submit" class="btn btn-success" value="Simpan">
+                            <button type="reset" class="btn btn-default">Batal</button>
+                          </div>
+                          </td>
+                         </tr>
+                       </div>
+                       </table>
+                     </form>
                   </div>
                 </div>
               </div>
@@ -268,8 +259,8 @@
         </div>
 
         <!-- /page content -->
-		
-		
+    
+    
 
         <!-- footer content -->
         <footer>

@@ -25,6 +25,27 @@ class model_kategori_produk extends CI_Model{
 		$query=$this->db->get('kategori_produk');
 		return $query->result();
 	}
+
+	public function data($number,$offset){ //Function untuk melimit hasil dari data yang diambil.
+		$this->db->select('*');
+		$query=$this->db->get('kategori_produk');
+		return $query= $this->db->get('kategori_produk',$number,$offset)->result();		
+	}
+ 
+	public function jumlah_data(){ //Function untuk menampilkan jumlah data yang ada.
+		$this->db->select('*');
+		$query=$this->db->get('kategori_produk');
+		return $query= $this->db->get('kategori_produk')->num_rows();
+	}
+
+	public function tambah_kategori(){
+		$nama_kategori_produk = $this->input->post('nama_kategori_produk');
+
+		$data = array(
+			'nama_kategori_produk' => $nama_kategori_produk
+			);
+		$this->db->insert('kategori_produk',$data);
+	}
 }
 
 

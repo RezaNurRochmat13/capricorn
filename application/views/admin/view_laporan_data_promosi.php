@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Gentellela Alela! | </title>
+    <title> Sistem Informasi Capricorn Roller </title>
 
     <!-- Bootstrap -->
     <link href="<?php echo base_url().'gentelella/'?>vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -26,7 +26,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Gentellela Alela!</span></a>
+              <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Capricorn System</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -182,7 +182,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Plain Page</h3>
+                <h3>Pelaporan data Master</h3>
               </div>
 
               <div class="title_right">
@@ -203,7 +203,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Plain Page</h2>
+                    <h2>Laporan Data Promosi</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -226,32 +226,34 @@
                       <thead>
                         <tr>
                           <th>No</th>
-                          <th>First Name</th>
-                          <th>Last Name</th>
-                          <th>Username</th>
+                          <th>Kode Promosi</th>
+                          <th>Nama Promosi</th>
+                          <th>Deskripsi Promosi</th>
+                          <th>Tanggal Terakhir Promosi</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <th scope="row">1</th>
-                          <td>Mark</td>
-                          <td>Otto</td>
-                          <td>@mdo</td>
-                        </tr>
-                        <tr>
-                          <th scope="row">2</th>
-                          <td>Jacob</td>
-                          <td>Thornton</td>
-                          <td>@fat</td>
-                        </tr>
-                        <tr>
-                          <th scope="row">3</th>
-                          <td>Larry</td>
-                          <td>the Bird</td>
-                          <td>@twitter</td>
-                        </tr>
+                        <?php if(empty($laporan_promosi)){ ?>
+                           <tr>
+                            <td colspan="6">Data tidak ditemukan</td>
+                           </tr>
+                          <?php }else{
+                            $no =  $this->uri->segment('3') + 1;
+                            foreach($laporan_promosi as $data){ $no;?>
+                           <tr>
+                            <td><?php echo $no++?></td>
+                            <td><?php echo $data->id_promosi?></td>
+                            <td><?php echo $data->nama_promosi?></td>
+                            <td><?php echo $data->deskripsi_promosi?></td>
+                            <td><?php echo date("d F Y",strtotime($data->tanggal_berakhir_promosi)); ?></td>
+                           </tr>
+                          <?php }}?>
                       </tbody>
-                    </table>
+                    </table><div class="row">
+                        <div class="col-md-12 text-center">
+                            <?php echo $this->pagination->create_links(); ?>
+                        </div>
+                    </div>
                   </div>
                 </div>
               </div>

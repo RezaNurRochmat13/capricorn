@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Gentellela Alela! | </title>
+    <title> Sistem Informasi Capricorn Roller </title>
 
     <!-- Bootstrap -->
     <link href="<?php echo base_url().'gentelella/'?>vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -26,7 +26,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Gentellela Alela!</span></a>
+              <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Capricorn System</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -182,7 +182,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Plain Page</h3>
+                <h3>Pelaporan Data Master</h3>
               </div>
 
               <div class="title_right">
@@ -203,7 +203,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Plain Page</h2>
+                    <h2>Laporan Data Produk</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -226,32 +226,39 @@
                       <thead>
                         <tr>
                           <th>No</th>
-                          <th>First Name</th>
-                          <th>Last Name</th>
-                          <th>Username</th>
+                          <th>Kode Produk</th>
+                          <th>Nama Produk</th>
+                          <th>Harga Produk</th>
+                          <th>Deskripsi Produk</th>
+                          <th>Nama Promosi</th>
+                          <th>Nama Kategori Produk</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <th scope="row">1</th>
-                          <td>Mark</td>
-                          <td>Otto</td>
-                          <td>@mdo</td>
-                        </tr>
-                        <tr>
-                          <th scope="row">2</th>
-                          <td>Jacob</td>
-                          <td>Thornton</td>
-                          <td>@fat</td>
-                        </tr>
-                        <tr>
-                          <th scope="row">3</th>
-                          <td>Larry</td>
-                          <td>the Bird</td>
-                          <td>@twitter</td>
-                        </tr>
+                         <?php if(empty($laporan_produk)){ ?>
+                           <tr>
+                            <td colspan="6">Data tidak ditemukan</td>
+                           </tr>
+                          <?php }else{
+                            $no =  $this->uri->segment('3') + 1;
+                            foreach($laporan_produk as $data){ $no;?>
+                           <tr>
+                            <td><?php echo $no++?></td>
+                            <td><?php echo $data->id_produk?></td>
+                            <td><?php echo $data->nama_produk?></td>
+                            <td><?php echo $rp ="Rp".number_format($data->harga_produk,2,',','.')?></td>
+                            <td><?php echo $data->deskripsi_produk?></td>
+                            <td><?php echo $data->nama_promosi?></td>
+                            <td><?php echo $data->nama_kategori_produk?></td>
+                           </tr>
+                          <?php }}?>
                       </tbody>
                     </table>
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <?php echo $this->pagination->create_links(); ?>
+                        </div>
+                    </div>
                   </div>
                 </div>
               </div>
