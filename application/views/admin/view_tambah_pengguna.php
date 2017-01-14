@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -54,7 +55,7 @@
                   </li>
                   <li><a><i class="fa fa-tasks"></i> Data Master <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="<?php echo site_url('produk/index')?>">Data Produk</a></li>
+                     <li><a href="<?php echo site_url('produk/index')?>">Data Produk</a></li>
                       <li><a href="<?php echo site_url('promosi/index')?>">Data Promosi</a></li>
                       <li><a href="<?php echo site_url('stok/index')?>">Data Stok Produk</a></li>
                       <li><a href="<?php echo site_url('kategori_produk/index')?>">Data Kategori Produk</a></li>
@@ -62,12 +63,12 @@
                   </li>
                   <li><a><i class="fa fa-book"></i> Pelaporan Data Master <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="<?php echo site_url('laporan_data_produk/index')?>">Pelaporan Data Produk</a></li>
+                       <li><a href="<?php echo site_url('laporan_data_produk/index')?>">Pelaporan Data Produk</a></li>
                       <li><a href="<?php echo site_url('laporan_data_promosi/index')?>">Pelaporan Data Promosi</a></li>
                       <li><a href="<?php echo site_url('laporan_data_stok/index')?>">Pelaporan Data Stok Produk</a></li>
                     </ul>
                   </li>
-                  <li><a href="<?php echo site_url('pengguna/index')?>"><i class="fa fa-users"></i> Manajemen Pengguna </a>
+                 <li><a href="<?php echo site_url('pengguna/index')?>"><i class="fa fa-users"></i> Manajemen Pengguna </a>
                   </li>
                 </ul>
               </div>
@@ -203,7 +204,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Data Pengguna</h2>
+                    <h2>Form Tambah Pengguna Baru</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -222,37 +223,47 @@
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
-                       <div class="col-md-7">
-                        <a href="<?php echo site_url('pengguna/tambah_pengguna')?>" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-plus"></i>Tambah Data Pengguna</a>
-                      </div>
-                      <table class="table table-hover">
-                      <thead>
-                        <tr>
-                          <th>No</th>
-                          <th>Nama Pengguna</th>
-                          <th>Password</th>
+                    
+                    <?php echo validation_errors(); ?>
+                      <form action="<?php echo site_url("pengguna/tambah_pengguna")?>" method="post">
+                       <table class="table table-striped" height="450px">
+                         <tr>
+                          <td>
+                            <div class=form-group-row>
+                              <label for="example-text-input" class="col-xs-2 col-form-label">Nama Pengguna</label>
+                                  <div class="col-xs-10">
+                                      <div class="right-inner-addon">
+                                     <input type="text" name="nama_pengguna" placeholder="Masukkan nama pengguna" class="form-control" value="<?php echo set_value('nama_pengguna')?>" required>
+                                  </div>
+                                </div>
+                            </div>
+                          </td>
                         </tr>
-                      </thead>
-                      <tbody>
-                       <?php if(empty($pengguna)){ ?>
-                           <tr>
-                            <td colspan="6">Data tidak ditemukan</td>
-                           </tr>
-                          <?php }else{
-                            $no =  $this->uri->segment('3') + 1;
-                            foreach($pengguna as $data){ $no;?>
-                           <tr>
-                            <td><?php echo $no++?></td>
-                            <td><?php echo $data->nama_pengguna?></td>
-                            <td><?php echo md5($data->password)?></td>
-                            <td>
-                                <?php echo anchor('masuk/edit/'.$data->id_pengguna,'<button type="button" class="btn btn-info"><i class="glyphicon glyphicon-pencil"></i>Edit Data</button>');?>
-                                <?php echo anchor('masuk/delete/'.$data->id_pengguna,'<button type="button" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i>Hapus Data</button>');?>
-                            </td>
-                           </tr>
-                          <?php }}?>
-                      </tbody>
-                    </table>
+                         <tr>
+                          <td>
+                            <div class=form-group-row>
+                              <label for="example-text-input" class="col-xs-2 col-form-label">Password Pengguna</label>
+                                  <div class="col-xs-10">
+                                      <div class="right-inner-addon">
+                                     <input type="password" name="password" placeholder="Masukkan password pengguna" class="form-control" value="<?php echo set_value('password')?>" required>
+                                  </div>
+                                </div>
+                            </div>
+                          </td>
+                        </tr>
+                       </div>
+                     </div>
+                   </div>
+                         <tr>
+                          <td>
+                            <input type="submit" name="submit" class="btn btn-success" value="Simpan">
+                            <button type="reset" class="btn btn-default">Batal</button>
+                          </div>
+                          </td>
+                         </tr>
+                       </div>
+                       </table>
+                     </form>
                   </div>
                 </div>
               </div>
@@ -261,8 +272,8 @@
         </div>
 
         <!-- /page content -->
-		
-		
+    
+    
 
         <!-- footer content -->
         <footer>

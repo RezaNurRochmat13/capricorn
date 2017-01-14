@@ -203,7 +203,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Data Seluruh Produk</h2>
+                    <h2>Data Produk</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -224,10 +224,12 @@
                   <div class="x_content">
                     <?php echo $this->session->flashdata('error')?>
                     <?php echo $this->session->flashdata('sukses')?>
+                    <?php echo $this->session->flashdata('ubah')?>
+                    <?php echo $this->session->flashdata('hapus')?>
                       <div class="col-md-7">
                         <a href="<?php echo site_url('produk/tambah_data_produk')?>" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-plus"></i>Tambah Data Produk</a>
                       </div>
-                        <form action="<?php echo site_url('masuk/cariData');?>" method = "post">
+                        <form action="<?php echo site_url('produk/cari_produk');?>" method = "post">
                         <div class="form-group-row">
                           <div class="col-xs-4">
                         <input type="text" class="form-control" placeholder="Masukkan nama produk yang dicari" name ="keyword" />
@@ -264,8 +266,8 @@
                             <td><?php echo $data->nama_promosi?></td>
                             <td><?php echo $data->nama_kategori_produk?></td>
                             <td>
-                                <?php echo anchor('masuk/edit/'.$data->id_produk,'<button type="button" class="btn btn-info"><i class="glyphicon glyphicon-pencil"></i>Edit Data</button>');?>
-                                <?php echo anchor('masuk/delete/'.$data->id_produk,'<button type="button" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i>Hapus Data</button>');?>
+                                <?php echo anchor('produk/edit_produk/'.$data->id_produk,'<button type="button" class="btn btn-info"><i class="glyphicon glyphicon-pencil"></i>Edit Data</button>');?>
+                                <?php echo anchor('produk/delete_produk/'.$data->id_produk,'<button type="button" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i>Hapus Data</button>');?>
                             </td>
                            </tr>
                           <?php }}?>

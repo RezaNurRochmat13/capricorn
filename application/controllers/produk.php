@@ -77,6 +77,66 @@ class produk extends CI_Controller{
 		}
 	}
 
+	public function edit_produk($kode){
+		$where=array('id_produk' => $kode);
+		$data['edit_produk'] = $this->model_produk->edit_data($where,'produk')->result();
+		$data['promosi'] = $this->model_produk->promosi();
+		$data['kategori'] = $this->model_produk->kategori();
+		$this->load->view('admin/view_ubah_produk',$data);
+	}
+
+	public function update_produk(){
+		$kode = $this->input->post('id_produk');
+		$nama_produk = $this->input->post('nama_produk');
+		$harga_produk = $this->input->post('harga_produk');
+		$deskripsi_produk = $this->input->post('deskripsi_produk');
+		$id_promosi = $this->input->post('id_promosi');
+		$id_kategori_produk = $this->input->post('id_kategori_produk');
+
+		$data = array(
+			'nama_produk' => $nama_produk,
+			'harga_produk' => $harga_produk,
+			'deskripsi_produk' => $deskripsi_produk,
+			'id_promosi' => $id_promosi,
+			'id_kategori_produk' => $id_kategori_produk
+			);
+
+		$where = array(
+
+			'id_produk' => $kode);
+
+		$this->form_validation->set_rules('nama_produk','Nama Produk','required');
+		$this->form_validation->set_rules('harga_produk','Harga Produk','required');
+		$this->form_validation->set_rules('deskripsi_produk','Deskripsi Produk','required');
+		$this->form_validation->set_rules('id_promosi','ID Promosi','required');
+		$this->form_validation->set_rules('id_kategori_produk','ID Kategori Produk','required');
+
+		if($this->form_validation->run()==FALSE){
+			$this->load->view('admin/view_ubah_produk');
+		} 
+		else {
+			$this->model_produk->update_data($where,$data,'produk');
+			$ubah = "<div class='alert alert-info'>Data anda berhasil diubah</div>";
+			$this->session->set_flashdata("ubah",$ubah);
+			redirect('produk/index');		
+		}
+	}
+
+	public function delete_produk($id){
+		$where = array('id_produk' => $id);
+		$this->model_produk->delete($where,'produk');
+		$hapus = "<div class='alert alert-danger'>Data anda berhasil dihapus</div>";
+		$this->session->set_flashdata("hapus",$hapus);
+		redirect('produk/index');
+
+	}
+
+	public function cari_produk(){
+		$keyword=$this->input->post('keyword');
+		$data['produk'] = $this->model_produk->cari($keyword);
+		$this->load->view('admin/view_produk',$data);
+	}
+
 }
 
 ?>

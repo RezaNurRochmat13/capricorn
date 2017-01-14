@@ -182,7 +182,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Pelaporan data Master</h3>
+                <h3>Pelaporan Data Master</h3>
               </div>
 
               <div class="title_right">

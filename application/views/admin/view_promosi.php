@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title> Sistem Infoormasi capricorn Roller </title>
+    <title> Sistem Informasi Capricorn Roller </title>
 
     <!-- Bootstrap -->
     <link href="<?php echo base_url().'gentelella/'?>vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -203,7 +203,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Data Seluruh Promosi</h2>
+                    <h2>Data Promosi</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>

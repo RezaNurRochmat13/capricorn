@@ -67,6 +67,29 @@ class model_produk extends CI_Model{
 		return $query->result();
 	}
 
+	public function edit_data($where,$table){		
+	return $this->db->get_where($table,$where);
+	}
+
+	public function update_data($where,$data,$table){
+		$this->db->where($where);
+		$this->db->update($table,$data);
+	}	
+
+	public function delete($where,$table){
+		$this->db->where($where);
+		$this->db->delete($table);
+	}
+
+	public function cari($keyword){
+		$this->db->select('produk.id_produk,produk.nama_produk,produk.harga_produk,
+							produk.deskripsi_produk,promosi.nama_promosi,kategori_produk.nama_kategori_produk');
+		$this->db->where('produk.id_promosi=promosi.id_promosi 
+						AND produk.id_kategori_produk=kategori_produk.id_kategori_produk');
+		$this->db->like('produk.nama_produk',$keyword);
+		$query= $this->db->get('produk,promosi,kategori_produk');
+		return $query->result();
+	}
 
 
 }

@@ -54,7 +54,7 @@
                   </li>
                   <li><a><i class="fa fa-tasks"></i> Data Master <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="<?php echo site_url('produk/index')?>">Data Produk</a></li>
+                     <li><a href="<?php echo site_url('produk/index')?>">Data Produk</a></li>
                       <li><a href="<?php echo site_url('promosi/index')?>">Data Promosi</a></li>
                       <li><a href="<?php echo site_url('stok/index')?>">Data Stok Produk</a></li>
                       <li><a href="<?php echo site_url('kategori_produk/index')?>">Data Kategori Produk</a></li>
@@ -62,12 +62,12 @@
                   </li>
                   <li><a><i class="fa fa-book"></i> Pelaporan Data Master <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="<?php echo site_url('laporan_data_produk/index')?>">Pelaporan Data Produk</a></li>
+                       <li><a href="<?php echo site_url('laporan_data_produk/index')?>">Pelaporan Data Produk</a></li>
                       <li><a href="<?php echo site_url('laporan_data_promosi/index')?>">Pelaporan Data Promosi</a></li>
                       <li><a href="<?php echo site_url('laporan_data_stok/index')?>">Pelaporan Data Stok Produk</a></li>
                     </ul>
                   </li>
-                  <li><a href="<?php echo site_url('pengguna/index')?>"><i class="fa fa-users"></i> Manajemen Pengguna </a>
+                 <li><a href="<?php echo site_url('pengguna/index')?>"><i class="fa fa-users"></i> Manajemen Pengguna </a>
                   </li>
                 </ul>
               </div>
@@ -182,7 +182,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Manajemen Pengguna</h3>
+                <h3>Plain Page</h3>
               </div>
 
               <div class="title_right">
@@ -203,7 +203,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Data Pengguna</h2>
+                    <h2>Plain Page</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -222,37 +222,100 @@
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
-                       <div class="col-md-7">
-                        <a href="<?php echo site_url('pengguna/tambah_pengguna')?>" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-plus"></i>Tambah Data Pengguna</a>
-                      </div>
-                      <table class="table table-hover">
-                      <thead>
-                        <tr>
-                          <th>No</th>
-                          <th>Nama Pengguna</th>
-                          <th>Password</th>
+                    
+                    <?php echo validation_errors(); ?>
+                    <?php foreach($edit_produk as $produk){?>
+                      <form action="<?php echo base_url(). 'index.php/produk/update_produk'; ?>" method="post">
+                       <table class="table table-striped" height="450px">
+                         <tr>
+                          <td>
+                            <div class=form-group-row>
+                              <label for="example-text-input" class="col-xs-2 col-form-label">Nama Produk</label>
+                                  <div class="col-xs-10">
+                                      <div class="right-inner-addon">
+                                      <input type="hidden" name="id_produk" value="<?php echo $produk->id_produk ?>">
+                                     <input type="text" name="nama_produk" placeholder="Masukkan nama produk" class="form-control" value="<?php echo $produk->nama_produk?>" required>
+                                  </div>
+                                </div>
+                            </div>
+                          </td>
                         </tr>
-                      </thead>
-                      <tbody>
-                       <?php if(empty($pengguna)){ ?>
-                           <tr>
-                            <td colspan="6">Data tidak ditemukan</td>
-                           </tr>
-                          <?php }else{
-                            $no =  $this->uri->segment('3') + 1;
-                            foreach($pengguna as $data){ $no;?>
-                           <tr>
-                            <td><?php echo $no++?></td>
-                            <td><?php echo $data->nama_pengguna?></td>
-                            <td><?php echo md5($data->password)?></td>
+                         <tr>
+                          <td>
+                            <div class="form-group-row">
+                               <label for="example-text-input" class="col-xs-2 col-form-label">Harga Produk</label>
+                                <div class="col-xs-10">
+                                  <div class="right-inner-addon">
+                                   <input type="number" name="harga_produk" class="form-control" placeholder="Masukkan harga produk" value="<?php echo $produk->harga_produk?>" required>
+                               </div> 
+                              </div>
+                            </div>
+                            </td>
+                         </tr>
+                         <tr>
+                          <td>
+                            <div class="form-group-row">
+                               <label for="example-text-input" class="col-xs-2 col-form-label">Deskripsi Produk</label>
+                                <div class="col-xs-10">
+                                  <div class="right-inner-addon">
+                                   <input type="text" name="deskripsi_produk" class="form-control" placeholder="Masukkan deskripsi produk" value="<?php echo $produk->deskripsi_produk?>" required>
+                               </div> 
+                              </div>
+                            </div>
+                            </td>
+                         </tr>
+                            <tr>
                             <td>
-                                <?php echo anchor('masuk/edit/'.$data->id_pengguna,'<button type="button" class="btn btn-info"><i class="glyphicon glyphicon-pencil"></i>Edit Data</button>');?>
-                                <?php echo anchor('masuk/delete/'.$data->id_pengguna,'<button type="button" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i>Hapus Data</button>');?>
+                              <label for="example-text-input" class="col-xs-2 col-form-label" required>Nama Promosi</label>
+                              <div class="col-xs-10">
+                                  <div class="form-group">
+                                        <select class="selectpicker form-control" name="id_promosi" required>
+                                        <?php 
+                                            foreach ($promosi as $key) { ?>
+                                              <option value='<?php echo $key->id_promosi?>'><?php echo $key->nama_promosi?></option>
+                          
+                                          <?php
+                                            }
+
+                                          ?>
+                                        </select>
+                                  </div>
+                              </div>
                             </td>
                            </tr>
-                          <?php }}?>
-                      </tbody>
-                    </table>
+                           <tr>
+                            <td>
+                              <label for="example-text-input" class="col-xs-2 col-form-label" required>Nama Kategori Produk</label>
+                              <div class="col-xs-10">
+                                  <div class="form-group">
+                                        <select class="selectpicker form-control" name="id_kategori_produk" required>
+                                        <?php 
+                                            foreach ($kategori as $key) { ?>
+                                              <option value='<?php echo $key->id_kategori_produk?>'><?php echo $key->nama_kategori_produk?></option>
+                          
+                                          <?php
+                                            }
+
+                                          ?>
+                                        </select>
+                                  </div>
+                              </div>
+                            </td>
+                           </tr>
+                       </div>
+                     </div>
+                   </div>
+                         <tr>
+                          <td>
+                            <input type="submit" name="submit" class="btn btn-success" value="Simpan">
+                            <button type="reset" class="btn btn-default">Batal</button>
+                          </div>
+                          </td>
+                         </tr>
+                       </div>
+                       </table>
+                     </form>
+                     <?php }?>
                   </div>
                 </div>
               </div>
@@ -261,8 +324,8 @@
         </div>
 
         <!-- /page content -->
-		
-		
+    
+    
 
         <!-- footer content -->
         <footer>
