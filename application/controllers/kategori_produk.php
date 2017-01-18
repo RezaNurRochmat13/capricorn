@@ -24,7 +24,7 @@ class kategori_produk extends CI_Controller{
 
 	public function index(){ 
 		$jumlah_data = $this->model_kategori_produk->jumlah_data();
-	    $config['base_url'] = base_url().'index.php/stok/index/';
+	    $config['base_url'] = base_url().'index.php/kategori_produk/index/';
 	    $config['total_rows'] = $jumlah_data;
 	    $config['per_page'] = 5;
 	    $from = $this->uri->segment(3);

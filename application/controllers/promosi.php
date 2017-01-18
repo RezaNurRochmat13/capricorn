@@ -74,6 +74,58 @@ class promosi extends CI_Controller{
 		}
 
 	}
+
+	public function edit_promosi($kode){
+		$where = array('id_promosi' => $kode);
+		$data['edit_promosi'] = $this->model_promosi->edit_data($where,'promosi')->result();
+		$this->load->view('admin/view_ubah_promosi',$data);	
+	}
+
+	public function update_promosi(){
+		$kode = $this->input->post('id_promosi');
+		$nama_promosi = $this->input->post('nama_promosi');
+		$deskripsi_promosi = $this->input->post('deskripsi_promosi');
+		$tanggal_berakhir_promosi = $this->input->post('tanggal_berakhir_promosi');
+
+		$data = array(
+			'nama_promosi' =>$nama_promosi,
+			'deskripsi_promosi' => $deskripsi_promosi,
+			'tanggal_berakhir_promosi' =>$tanggal_berakhir_promosi
+			);
+
+		$where = array(
+			'id_promosi' => $kode
+			);
+
+		$this->form_validation->set_rules('nama_promosi','Nama Promosi','required');
+		$this->form_validation->set_rules('deskripsi_promosi','Deskripsi Promosi','required');
+		$this->form_validation->set_rules('tanggal_berakhir_promosi','Tanggal Berakhir Promosi','required');
+
+		if($this->form_validation->run() == FALSE){
+			$this->load->view('admin/view_ubah_promosi');
+		}
+
+		else{
+			$this->model_promosi->update_data($where,$data,'promosi');
+			$ubah = "<div class='alert alert-info'>Data anda telah berhasil diubah</div>";
+			$this->session->set_flashdata("ubah",$ubah);
+			redirect('promosi/index');
+		}
+	}
+
+	public function delete_promosi($id){
+		$where = array('id_promosi' => $id );
+		$this->model_promosi->delete($where,'promosi');
+		$hapus = "<div class='alert alert-danger'>Data anda telah berhasil dihapus</div>";
+		$this->session->set_flashdata("hapus",$hapus);
+		redirect('promosi/index');
+	}
+
+	public function cari_promosi(){
+		$keyword = $this->input->post('keyword');
+		$data['promosi'] = $this->model_promosi->cari($keyword);
+		$this->load->view('admin/view_promosi',$data);
+	}
 }
 
 
